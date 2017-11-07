@@ -1,7 +1,7 @@
 Template.lista.helpers({
 
     tarefas : function(){
-        return Tarefas.find({});
+        return Tarefas.find({}, { sort: { data: -1 } });
     },
 
     formataData : function(data){
@@ -9,3 +9,12 @@ Template.lista.helpers({
     }
 
 });
+
+Template.lista.events({
+    "click .delete_button": function(event, Template){
+        var tarefa = this;
+
+        Meteor.call("remove", tarefa._id);
+    }
+});
+
